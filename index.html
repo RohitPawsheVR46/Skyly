@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skyly - Weather App</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Navbar -->
+        <nav>
+            <div class="logo">
+                <i class="fa-solid fa-cloud-sun"></i>
+                <span>Skyly</span>
+            </div>
+
+            <button class="location-btn">
+                <i class="fa-solid fa-location-dot"></i>
+                Detect Location
+            </button>
+        </nav>
+
+
+        <!-- Search -->
+        <section class="search-section">
+
+            <h1>What's the weather like?</h1>
+            <p>Check the weather anywhere in the world.</p>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search city...">
+                <button>Search</button>
+            </div>
+
+        </section>
+
+
+        <!-- Current Weather -->
+        <main>
+
+            <section class="weather-card">
+
+                <div class="weather-location">
+                    <div>
+                        <h2>Mumbai</h2>
+                        <p>India</p>
+                    </div>
+
+                    <i class="fa-solid fa-cloud-sun weather-icon"></i>
+                </div>
+
+                <div class="temperature">
+                    <span>28</span>
+                    <sup>°C</sup>
+                </div>
+
+                <h3>Partly Cloudy</h3>
+
+                <p class="feels">
+                    Feels like 30°C
+                </p>
+
+                <div class="weather-details">
+
+                    <div>
+                        <i class="fa-solid fa-droplet"></i>
+                        <span>Humidity</span>
+                        <strong>72%</strong>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-wind"></i>
+                        <span>Wind</span>
+                        <strong>14 km/h</strong>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-eye"></i>
+                        <span>Visibility</span>
+                        <strong>8 km</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Forecast -->
+            <section class="forecast">
+
+                <div class="section-heading">
+                    <h2>5-Day Forecast</
