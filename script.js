@@ -82,7 +82,7 @@ async function getWeatherForCity(cityName) {
 //create card.......
 
 async function createCard(cityy) {
-   let value = await getWeatherForCity(cityy);
+    let value = await getWeatherForCity(cityy);
     let container = document.getElementById("weather-container");
 
     // Main card
@@ -134,7 +134,7 @@ async function createCard(cityy) {
 
     // Weather condition
     let condition = document.createElement("h3");
-    condition.textContent = "Partly Cloudy";
+    // condition.textContent = "Partly Cloudy";
 
 
     // Feels like
@@ -158,7 +158,7 @@ async function createCard(cityy) {
     humidityText.textContent = "Humidity";
 
     let humidityValue = document.createElement("strong");
-    humidityValue.textContent = value.current.humidity +" %";
+    humidityValue.textContent = value.current.humidity + " %";
 
     humidity.appendChild(humidityIcon);
     humidity.appendChild(humidityText);
@@ -192,7 +192,7 @@ async function createCard(cityy) {
     visibilityText.textContent = "Visibility";
 
     let visibilityValue = document.createElement("strong");
-    visibilityValue.textContent =`${value.current.visibility / 1000} km`;
+    visibilityValue.textContent = `${value.current.visibility / 1000} km`;
 
     visibility.appendChild(visibilityIcon);
     visibility.appendChild(visibilityText);
@@ -214,12 +214,104 @@ async function createCard(cityy) {
     // Add card to webpage
     container.appendChild(card);
 }
-    createCard("Mumbai");
+createCard("Mumbai");
 
 
 //search 
 let searchBtn = document.querySelector("#search-btn");
 let searchInput = document.querySelector("#search-inp");
 searchBtn.addEventListener("click", function (e) {
-    getWeatherForCity(searchInput.value);
+    document.querySelector("#weather-container").innerHTML = "";
+    document.querySelector("#forecast-container").innerHTML = "";
+
+    createCard(searchInput.value);
+    futureForecast(searchInput.value);
+
 })
+
+//future forecast
+async function futureForecast(cityy) {
+    let value = await getWeatherForCity(cityy);
+    let data_array = [...value.daily];
+
+    //looop
+    let Final_data = data_array.forEach(function (date, i) {
+
+    })
+
+
+
+    // date --> mon/tues/wed/..
+    function date_To_day(datee) {
+        const dayName = new Date(datee).toLocaleDateString("en-US", { weekday: "short" });
+        console.log(dayName); // "Sun"
+        return dayName;
+    }
+
+
+    let forecastContainer = document.getElementById("forecast-container");
+
+    // Main section
+    let forecast = document.createElement("section");
+    forecast.className = "forecast";
+
+
+    // Heading
+    let sectionHeading = document.createElement("div");
+    sectionHeading.className = "section-heading";
+
+    let heading = document.createElement("h2");
+    heading.textContent = "5-Day Forecast";
+
+    sectionHeading.appendChild(heading);
+
+
+    // Cards container
+    let cardsContainer = document.createElement("div");
+    cardsContainer.className = "forecast-container";
+
+
+    function createForecastCard(day, icon, maxTemp, minTemp) {
+
+        let card = document.createElement("div");
+        card.className = "forecast-card";
+
+        let dayName = document.createElement("p");
+        dayName.textContent = day;
+
+        let weatherIcon = document.createElement("i");
+        weatherIcon.className = icon;
+
+        let maxTemperature = document.createElement("h3");
+        maxTemperature.textContent = maxTemp + "°";
+
+        let minTemperature = document.createElement("span");
+        minTemperature.textContent = minTemp + "°";
+
+        card.appendChild(dayName);
+        card.appendChild(weatherIcon);
+        card.appendChild(maxTemperature);
+        card.appendChild(minTemperature);
+
+        return card;
+    }
+
+
+    // Add cards
+    data_array.forEach(function (value) {
+        cardsContainer.appendChild(
+            createForecastCard(date_To_day(value.date), "fa-solid fa-cloud-sun", value.tempMax, value.tempMin)
+        );
+    })
+
+
+    // Build section
+    forecast.appendChild(sectionHeading);
+    forecast.appendChild(cardsContainer);
+
+
+    // Add section to placeholder
+    forecastContainer.appendChild(forecast);
+}
+
+futureForecast("Mumbai");
